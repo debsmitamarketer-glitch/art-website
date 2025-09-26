@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debsmita's Art Landing Page</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+  html { scroll-behavior: smooth; }
+  body { background:#f9f9f9; color:#333; }
+
+  /* Header / Hero */
+  header {
+    background:#ffebcd;
+    text-align:center;
+    padding:100px 20px;
+  }
+  header h1 { font-size:2.5rem; color:#ff4500; margin-bottom:20px; }
+  header p { font-size:1.2rem; margin-bottom:30px; }
+  .cta { background:#ff4500; color:#fff; padding:15px 25px; text-decoration:none; border-radius:5px; font-weight:bold; transition:0.3s; }
+  .cta:hover { background:#ff6347; }
+
+  /* Benefits */
+  section { max-width:1000px; margin:50px auto; padding:0 20px; scroll-margin-top:80px; }
+  h2 { text-align:center; color:#ff6347; margin-bottom:30px; }
+  .benefits { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+  .benefit { background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); flex:1 1 250px; text-align:center; }
+
+  /* Portfolio */
+  .portfolio { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; justify-items:center; }
+  .portfolio img { width:100%; border-radius:10px; transition:0.3s; cursor:pointer; }
+  .portfolio img:hover { transform:scale(1.05); box-shadow:0 8px 15px rgba(0,0,0,0.2); }
+
+  /* Form */
+  form { display:flex; flex-direction:column; max-width:400px; margin:0 auto; gap:15px; }
+  input, textarea { padding:10px; border-radius:5px; border:1px solid #ccc; width:100%; }
+  button { padding:12px; background:#ff4500; color:#fff; border:none; border-radius:5px; font-weight:bold; cursor:pointer; }
+  button:hover { background:#ff6347; }
+
+  /* Footer */
+  footer { background:#222; color:#fff; text-align:center; padding:20px 0; margin-top:50px; }
+
+  /* Back to top button */
+  #topBtn {
+    display:none; position:fixed; bottom:30px; right:30px; z-index:99;
+    font-size:18px; border:none; outline:none; background-color:#ff4500;
+    color:white; cursor:pointer; padding:10px 15px; border-radius:5px;
+    transition:0.3s;
+  }
+  #topBtn:hover { background-color:#ff6347; }
+
+  /* Lightbox */
+  #lightbox { display:none; position:fixed; z-index:999; left:0; top:0;
+    width:100%; height:100%; background-color:rgba(0,0,0,0.8);
+    justify-content:center; align-items:center; }
+  #lightbox img { max-width:90%; max-height:90%; border-radius:10px; }
+
+  @media(max-width:600px){ .benefits { flex-direction:column; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to My Art World 🎨</h1>
+  <p>Explore my artworks and connect with me directly!</p>
+  <a href="#contact" class="cta">Contact Me Now</a>
+</header>
+
+<nav style="text-align:center; padding:10px 0; background:#fff5ee; position:sticky; top:0; z-index:1000;">
+  <a href="#benefits" style="margin:0 15px; color:#ff4500; font-weight:bold;">Why Work With Me</a>
+  <a href="#portfolio" style="margin:0 15px; color:#ff4500; font-weight:bold;">Portfolio</a>
+  <a href="#contact" style="margin:0 15px; color:#ff4500; font-weight:bold;">Contact</a>
+</nav>
+
+<section id="benefits">
+  <h2>Why Work With Me?</h2>
+  <div class="benefits">
+    <div class="benefit">🎨 Unique, colorful art tailored to your taste</div>
+    <div class="benefit">🖌️ Professional quality, handcrafted and digital</div>
+    <div class="benefit">💌 Quick response and personalized service</div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <h2>My Portfolio</h2>
+  <div class="portfolio">
+    <img src="images/art1.jpeg" alt="Artwork 1">
+    <img src="images/art2.jpeg" alt="Artwork 2">
+    <img src="images/art3.jpeg" alt="Artwork 3">
+    <img src="images/art4.jpeg" alt="Artwork 4">
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 Debsmita Das | Follow me on <a href="https://instagram.com/marketerdebsmita" target="_blank" style="color:#ff4500;">Instagram</a></p>
+</footer>
+
+<button id="topBtn" onclick="topFunction()">⬆ Back to Top</button>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Back to Top
+  let topButton = document.getElementById("topBtn");
+  window.onscroll = function() {scrollFunction()};
+  function scrollFunction() {
+    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
+      topButton.style.display = "block";
+    } else { topButton.style.display = "none"; }
+  }
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const images = document.querySelectorAll(".portfolio img");
+  images.forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+    });
+  });
+  function closeLightbox() { lightbox.style.display = "none"; }
+</script>
+
+</body>
+</html>
